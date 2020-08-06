@@ -1,0 +1,24 @@
+version: "3"
+services: 
+  mysql: 
+    environment: 
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=tarefas
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+    image: mysql:5.7
+    ports: 
+      - 3306:3306
+    volumes: 
+      - /data/mysql
+   
+
+  web: 
+    image: tarefas
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    depends_on: 
+      - mysql
+    ports:
+      - 8080:8080
